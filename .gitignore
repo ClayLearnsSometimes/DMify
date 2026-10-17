@@ -5,6 +5,7 @@ __pycache__/
 # Scraped content (copyrighted, and large)
 unformatted pages/
 clean_pages/
+pages/
 index.json
 
 # waybackup progress files

@@ -5,8 +5,8 @@ from pathlib import Path
 from urllib.parse import unquote
 from bs4 import BeautifulSoup
 
-SRC = Path("waybackup_snapshots")   # waybackup's output folder
-OUT = Path("pages")                 # clean copies go here
+SRC = Path("pages")   # waybackup's output folder
+OUT = Path("darkmode_pages")                 # clean copies go here
 SKIP = {"search", "system", "forum", "admin", "nav", "page-tags"}
 
 def clean_name(slug):

@@ -3,6 +3,8 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl
 from pathlib import Path
 
+import diceCalculator as diceCalculator
+
 app = QApplication([])
 
 # the two panels
@@ -23,16 +25,19 @@ splitter.setStretchFactor(1, 2)   # browser gets 2 parts
 window = QMainWindow()
 window.setCentralWidget(splitter)
 window.resize(1200, 700)
+window.setWindowTitle("DMify: D&D Reference Browser")
 
 # clicking a sidebar item loads a page
 def open_page(item):
     filename = item.text().lower() + ".html"
     if item.text() == "Fireball":
-        filename = "clean_pages/feat-dual-wielder.html"
+        filename = "pages/spell-fireball.html"
+    elif item.text() == "Goblin":
+        filename = "pages/goblin.html"
     browser.setUrl(QUrl.fromLocalFile(str(Path(filename).resolve())))
 
 sidebar.itemClicked.connect(open_page)
 
-browser.setUrl(QUrl.fromLocalFile(str(Path("testFile.html").resolve())))
+browser.setUrl(QUrl.fromLocalFile(str(Path("pages/goblin.html").resolve())))
 window.show()
 app.exec()
