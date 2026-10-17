@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QSplitter, QListWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QSplitter, QListWidget
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl
 from pathlib import Path
@@ -10,15 +10,22 @@ app = QApplication([])
 # the two panels
 sidebar = QListWidget()
 sidebar.addItem("Welcome")
+sidebar.addItem("Sorcerer")
 sidebar.addItem("Fireball")
 sidebar.addItem("Goblin")
+sidebar.addItem("Spells")
+
 
 browser = QWebEngineView()
+#button = QPushButton("Roll 2d8")
+
+#button.clicked.connect(lambda: diceCalculator.roll(2, 8))
 
 # put them side by side in a splitter
 splitter = QSplitter()
 splitter.addWidget(sidebar)
 splitter.addWidget(browser)
+#splitter.addWidget(button)
 splitter.setStretchFactor(0, 1)   # sidebar gets 1 part
 splitter.setStretchFactor(1, 2)   # browser gets 2 parts
 
@@ -39,6 +46,12 @@ def open_page(item):
         filename = "pages/spell-fireball.html"
     elif item.text() == "Goblin":
         filename = "pages/goblin.html"
+    elif item.text() == "Sorcerer":
+        filename = "pages/sorcerer.html"
+    elif item.text() == "Fireball":
+       filename = "pages/spell-fireball.html"
+    elif item.text() == "Spells":
+        filename = "pages/spells.html"
     browser.setUrl(QUrl.fromLocalFile(str(Path(filename).resolve())))
 
 sidebar.itemClicked.connect(open_page)
