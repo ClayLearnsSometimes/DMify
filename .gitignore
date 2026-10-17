@@ -2,12 +2,22 @@
 .venv/
 __pycache__/
 
-# Scraped content (copyrighted, and large)
-unformatted pages/
+# Scraped wiki content (not mine to redistribute)
+waybackup_snapshots/
 clean_pages/
+clean_pages_dark/
 pages/
 index.json
+skipped.txt
 
 # waybackup progress files
 waybackup*
 *.cdx
+*.csv
+*.db
+
+# Commercial artwork
+welcome/welcome_bg.png
+
+# Anything else downloaded
+ruby_download/

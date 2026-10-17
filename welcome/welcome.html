@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Welcome</title>
+
+  <style>
+    /* ---------- Colors: change these to restyle the whole screen ---------- */
+    :root {
+      --accent: #e04848;      /* red used for the title glow and divider */
+      --text: #f0f0f4;        /* main text */
+      --muted: #c4c4cc;       /* softer text */
+    }
+
+    /* Make the page fill the whole panel and remove default spacing */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      /* Two backgrounds stacked: a dark fade on top, the picture underneath.
+         Raise the 0.55 / 0.85 numbers for a darker image, lower them for brighter. */
+      background:
+        linear-gradient(rgba(10, 10, 14, 0.55), rgba(10, 10, 14, 0.85)),
+        url("welcome_bg.png") center / cover no-repeat;
+      background-color: #16161a;   /* shown if the picture file is missing */
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+
+      /* Centered top-to-bottom, but pushed toward the left so the
+         character in the picture stays visible on the right */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 6vw;      /* bigger number = text moves right, smaller = left */
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 480px;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0 0 8px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 24px var(--accent), 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin: 0 0 24px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    hr {
+      width: 120px;
+      border: none;
+      border-top: 2px solid var(--accent);
+      margin: 0 auto 24px;
+    }
+
+    .hints {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    /* The example phrases get a red highlight */
+    .hints em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>DMify</h1>
+    <p class="tagline">Your tabletop reference, at the speed of speech.</p>
+    <hr>
+    <div class="hints">
+      Pick an entry from the list on the left,<br>
+      or just say its name.<br>
+      Try <em>“look up fireball”</em>
+    </div>
+  </div>
+</body>
+</html>

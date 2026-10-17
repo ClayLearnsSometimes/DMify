@@ -9,6 +9,7 @@ app = QApplication([])
 
 # the two panels
 sidebar = QListWidget()
+sidebar.addItem("Welcome")
 sidebar.addItem("Fireball")
 sidebar.addItem("Goblin")
 
@@ -27,10 +28,14 @@ window.setCentralWidget(splitter)
 window.resize(1200, 700)
 window.setWindowTitle("DMify: D&D Reference Browser")
 
+#browser.setURL(QUrl.fromLocalFile(str(Path("welcome.html").resolve())))
+
 # clicking a sidebar item loads a page
 def open_page(item):
     filename = item.text().lower() + ".html"
-    if item.text() == "Fireball":
+    if item.text() == "Welcome":
+            filename = "welcome/welcome.html"
+    elif item.text() == "Fireball":
         filename = "pages/spell-fireball.html"
     elif item.text() == "Goblin":
         filename = "pages/goblin.html"
@@ -38,6 +43,6 @@ def open_page(item):
 
 sidebar.itemClicked.connect(open_page)
 
-browser.setUrl(QUrl.fromLocalFile(str(Path("pages/goblin.html").resolve())))
+browser.setUrl(QUrl.fromLocalFile(str(Path("welcome/welcome.html").resolve())))
 window.show()
 app.exec()
