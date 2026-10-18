@@ -5,9 +5,12 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 from bs4 import BeautifulSoup
 
-SRC = Path("waybackup_snapshots")   # waybackup's output folder
-OUT = Path("pages")           # finished pages the app displays
-STYLE = Path("style.css")           # your master stylesheet
+
+ROOT = Path(__file__).resolve().parent.parent    # the DMify folder
+
+SRC = ROOT / "waybackup_snapshots"
+OUT = ROOT / "testDump"
+STYLE = ROOT / "style.css"
 SKIP = {"search", "system", "forum", "admin", "nav", "page-tags"}
 MIN_SIZE = 500                      # smaller files are usually failed captures
 
@@ -56,7 +59,7 @@ for f in SRC.rglob("*"):
 print(f"Pass 1: found {len(best)} unique pages")
 
 # which pages exist locally (used to decide if a link is usable)
-existing = {clean_name(slug) for slug in best}
+existing = {clean_name(slug) for slug in best} | {p.name for p in OUT.glob("*.html")}
 
 # ---------- PASS 2: clean each page and write it out ----------
 TEMPLATE = """<!DOCTYPE html>
@@ -89,6 +92,9 @@ for slug, info in best.items():
     else:
         name = slug
 
+    for tag in content.select(".content-separator"):
+        tag.decompose()
+
     for tag in content.find_all(["script", "iframe", "form"]):
         tag.decompose()
 
@@ -102,6 +108,7 @@ for slug, info in best.items():
         else:
             a.name = "span"             # page wasn't archived: plain text
             a["class"] = a.get("class", []) + ["missing"]
+            a["data-target"] = target   
             del a["href"]
 
     filename = clean_name(slug)
