@@ -20,8 +20,6 @@ def fallDmg(ftFallen: int):
         ftFallen = 200
     return roll(ftFallen//10, 6)
 
-    
-# 1. Define a main function to control execution
 def main():
     print("--- D&D Dice & Damage Simulator ---")
     
@@ -34,6 +32,5 @@ def main():
     damage = fallDmg(distance)
     print(f"Fall damage from {distance} feet: {damage}")
 
-# 2. Tell Python to run the main function when this file is executed
 if __name__ == "__main__":
     main()

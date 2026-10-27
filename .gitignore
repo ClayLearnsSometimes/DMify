@@ -7,7 +7,6 @@ waybackup_snapshots/
 clean_pages/
 clean_pages_dark/
 pages/
-Scraping/
 dist/
 index.json
 skipped.txt

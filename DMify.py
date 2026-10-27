@@ -17,7 +17,7 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl, Qt, QThread, Signal
 from PySide6.QtGui import QIcon
 
-from matcher import Matcher
+from matcher import Matcher #Do I still need this... I know i need sleep
 import matcher as matcher_mod
 
 # ---------------- Base Path Setup (Supports PyInstaller .exe) ----------------
@@ -91,7 +91,7 @@ def load_whisper_model():
 
     # 2. Upgraded CPU Fallback: Distil-Large-V3 (INT8) + Full Core Utilization
     try:
-        # Determine optimal thread count based on your CPU's available cores
+        # Determine optimal thread count based on available cores
         threads = os.cpu_count() or 4
         print(f"Loading Whisper on CPU using base.en (INT8) across {threads} threads...")
         
