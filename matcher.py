@@ -66,6 +66,31 @@ class Matcher:
         order = np.argsort(-best)[:20]
         return [(int(round(best[i])), int(i)) for i in order]
 
+    def suggest(self, text, top=10, min_score=60):
+        """For a search bar: no score cutoffs, and it copes with partial words."""
+        t = _norm(text)
+        letters = t.replace(" ", "")
+        if not letters:
+            return []
+
+        found = {}                                   # entry number -> best score so far
+
+        # 1. names that start with, or contain, what was typed (works for 1-3 letters)
+        for i, name in enumerate(self.letters):
+            if name.startswith(letters):
+                found[i] = 100
+            elif letters in name:
+                found[i] = 90
+
+        # 2. fuzzy + sound-alike matching (needs 4+ letters)
+        if len(letters) >= MIN_WINDOW_LETTERS:
+            for score, i in self._rank(t):
+                found[i] = max(found.get(i, 0), score)
+
+        ranked = [(i, s) for i, s in found.items() if s >= min_score]
+        ranked = sorted(ranked, key=lambda kv: -kv[1])[:top]
+        return [(score, self.entries[i]) for i, score in ranked]
+
     def search(self, text, top=5):
         """Returns (triggered, [(score, entry), ...])."""
         t = _dedupe(_norm(text))

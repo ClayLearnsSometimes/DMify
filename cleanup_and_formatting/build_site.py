@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parent.parent    # the DMify folder
 
 SRC = ROOT / "waybackup_snapshots"
-OUT = ROOT / "testDump"
+OUT = ROOT / "pages"
 STYLE = ROOT / "style.css"
 SKIP = {"search", "system", "forum", "admin", "nav", "page-tags"}
 MIN_SIZE = 500                      # smaller files are usually failed captures
